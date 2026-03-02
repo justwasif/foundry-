@@ -21,7 +21,7 @@ contract FundMe {
 
     // State variables
     uint256 public constant MINIMUM_USD = 5 * 10 ** 18;
-    address public immutable i_owner;
+    address private immutable i_owner;
     address[] private s_funders;
     mapping(address => uint256) private s_addressToAmountFunded;
     AggregatorV3Interface private s_priceFeed;
@@ -89,7 +89,11 @@ contract FundMe {
      * Getter Functions
      */
 
-  
+    /**
+     * @notice Gets the amount that an address has funded
+     *  @param fundingAddress the address of the funder
+     *  @return the amount funded
+     */
     function getAddressToAmountFunded(address fundingAddress) public view returns (uint256) {
         return s_addressToAmountFunded[fundingAddress];
     }
@@ -109,6 +113,4 @@ contract FundMe {
     function getPriceFeed() public view returns (AggregatorV3Interface) {
         return s_priceFeed;
     }
-    
-   
 }
